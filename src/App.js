@@ -1,27 +1,41 @@
 import { useState } from 'react';
-import GenericElementGrid from './components/grid/Grid';
 import './App.css';
+import Grid from './components/grid/Grid';
 
 function App() {
-  const [textAreaInputVal, setTextAreaInputVal] = useState(`2,1,gender,SELECT,Male,Female
-  1,1,First Name,TEXT_INPUT,Enter your first name
+  const [textAreaInputVal, setTextAreaInputVal] = useState(`1,1,gender,SELECT,Male,Female
+  1,2,First Name,TEXT_INPUT,Enter your first name
+  1,3,marital status,SELECT,Single,Maried,Divorced
+  2,1,marital status,SELECT,Single,Maried,Divorced
   2,2,marital status,SELECT,Single,Maried,Divorced
-  1,2,Last Name,TEXT_INPUT,Enter your last name`);
+  2,3,marital status,SELECT,Single,Maried,Divorced
+  3,3,Last Name,TEXT_INPUT,Enter your last name`);
   const [genericElementList, setGenericElementList] = useState([]);
+  const [rowNum, setRowNum] = useState(0);
+  const [colNum, setColNum] = useState(0);
 
   const calculateElements = () => {
     const elementList = [];
     const textRows = textAreaInputVal.split("\n");
+    let maxColumn = 0;
+    let maxRow = 0;
+
     textRows.forEach(textRow => {
       const [row, col, label, type, ...value] = textRow.trim().split(",");
-      elementList.push({
-        row, col, label, type, value
-      })
+      maxRow = Math.max(col, maxColumn);
+      maxColumn = Math.max(row, maxRow);
+      elementList.push({ row, col, label, type, value })
     });
 
-    elementList.sort((a, b) => Number(a.row + a.col) - Number(b.row + b.col));
+    const sortedElementList = sortElementListByRowCols(elementList);
 
-    setGenericElementList(elementList);
+    setRowNum(maxRow);
+    setColNum(maxColumn);
+    setGenericElementList(sortedElementList);
+  }
+
+  const sortElementListByRowCols = (elementList) => {
+    return elementList.sort((a, b) => Number(a.row + a.col) - Number(b.row + b.col));;
   }
 
   const handleTextAreaInputChange = (e) => {
@@ -31,9 +45,9 @@ function App() {
   return (
     <div className="app-container">
       <h1 className='title'>Elements Drawer</h1>
-      <textarea className='text-area' value={textAreaInputVal} onChange={e => handleTextAreaInputChange(e)}></textarea>
+      <textarea className='textarea' value={textAreaInputVal} onChange={e => handleTextAreaInputChange(e)}></textarea>
       <input className='calculate-element-button' type='button' value="Calculate Elements" onClick={() => calculateElements()} />
-      <GenericElementGrid genericElementList={genericElementList}></GenericElementGrid>
+      <Grid rowNum={rowNum} colNum={colNum} genericElementList={genericElementList} />
     </div>
   );
 }
