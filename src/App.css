@@ -1,6 +1,11 @@
-.text-area {
-  width: 20%;
-  height: 20%;
+html,
+body {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
 }
 
 .app-container {
@@ -8,4 +13,45 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.calculate-element-button {
+  width: 15%;
+  background-color: #0096ff;
+  border: 1px solid black;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  height: 50px;
+  font-weight: bold;
+}
+
+.calculate-element-button:hover,
+.calculate-element-button:focus {
+  opacity: 0.8;
+}
+
+.text-area {
+  margin: 1%;
+  width: 40%;
+  padding: 1%;
+  height: 180px;
+  font-weight: bold;
+  font-size: 1rem;
+  overflow-y: auto;
+}
+
+.title {
+  color: #e74c3c;
+  background-color: #f7dc6f;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
 }
