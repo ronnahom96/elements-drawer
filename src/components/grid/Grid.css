@@ -1,7 +1,12 @@
-.grid {
+.grid-container {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
   grid-gap: 10px;
   background-color: #fff;
   color: #444;
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr !important;
+  }
 }
