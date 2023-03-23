@@ -1,20 +1,25 @@
 import { useState } from 'react';
+import GenericElementGrid from './components/grid/Grid';
 import './App.css';
-import GenericElementGrid from './components/ElementGrid/ElementGrid';
 
 function App() {
-  const [textAreaInputVal, setTextAreaInputVal] = useState('');
+  const [textAreaInputVal, setTextAreaInputVal] = useState(`2,1,gender,SELECT,Male,Female
+  1,1,First Name,TEXT_INPUT,Enter your first name
+  2,2,marital status,SELECT,Single,Maried,Divorced
+  1,2,Last Name,TEXT_INPUT,Enter your last name`);
   const [genericElementList, setGenericElementList] = useState([]);
 
   const calculateElements = () => {
     const elementList = [];
     const textRows = textAreaInputVal.split("\n");
     textRows.forEach(textRow => {
-      const [row, col, label, type, ...value] = textRow.split(",");
+      const [row, col, label, type, ...value] = textRow.trim().split(",");
       elementList.push({
         row, col, label, type, value
       })
     });
+
+    elementList.sort((a, b) => Number(a.row + a.col) - Number(b.row + b.col));
 
     setGenericElementList(elementList);
   }
@@ -25,8 +30,9 @@ function App() {
 
   return (
     <div className="app-container">
+      <h1 className='title'>Elements Drawer</h1>
       <textarea className='text-area' value={textAreaInputVal} onChange={e => handleTextAreaInputChange(e)}></textarea>
-      <input type='button' value="Calculate Elements" onClick={() => calculateElements()} />
+      <input className='calculate-element-button' type='button' value="Calculate Elements" onClick={() => calculateElements()} />
       <GenericElementGrid genericElementList={genericElementList}></GenericElementGrid>
     </div>
   );
