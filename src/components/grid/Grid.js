@@ -1,10 +1,10 @@
 import React from 'react'
-import GenericElement from '../GenericElement/GenericElement';
-import './GenericElementGrid.css';
+import GenericElement from '../genericElement/GenericElement';
+import './Grid.css';
 
-export default function GenericElementGrid({ genericElementList }) {
+export default function Grid({ genericElementList }) {
     return (
-        <div className='generic-element-grid'>
+        <div className='grid'>
             {
                 genericElementList.map((genericElement) => (
                     <GenericElement key={Object.values(genericElement).join(",")} genericElement={genericElement} />

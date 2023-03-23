@@ -1,7 +1,7 @@
 import React from 'react';
-import { SELECT, TEXT_INPUT } from '../../constants';
-import { SelectInput } from '../genericElements/SelectInput';
-import { TextInput } from '../genericElements/TextInput';
+import { SELECT, TEXT_INPUT } from '../../common/constants'
+import SelectInput from '../genericElements/SelectInput/SelectInput'
+import TextInput from '../genericElements/TextInput/TextInput';
 import './GenericElement.css';
 
 export default function GenericElement({ genericElement }) {
