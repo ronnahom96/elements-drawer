@@ -1,5 +1,5 @@
-import React from 'react'
-import GenericElement from '../genericElement/GenericElement';
+import React from 'react';
+import GenericElement from '../GenericElement';
 import './Grid.css';
 
 export default function Grid({ rowNum, colNum, genericElementList }) {
