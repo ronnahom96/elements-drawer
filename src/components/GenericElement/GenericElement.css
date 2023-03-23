@@ -1,0 +1,8 @@
+.generic-element-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item {
+    grid-column-start: col-start 2;
+}
